@@ -129,9 +129,6 @@ dmypy.json
 .pyre/
 
 # tnp specific files
-config.json
-db.sqlite3
-migrations/
 
 # settings.py
 # static/
