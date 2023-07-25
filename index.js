@@ -3,9 +3,10 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 
+let local_settings = JSON.parse(fs.readFileSync('local_settings.json'));
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/tnpartners.net/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/tnpartners.net/fullchain.pem')
+  key: fs.readFileSync(local_settings.key),
+  cert: fs.readFileSync(local_settings.cert)
 };
 
 // Create a service (the app object is just a callback).
@@ -23,7 +24,7 @@ app.get("*", (req, res) => {
 
     if(req.secure){
         // --- https
-        res.send('HELLO WORLD')
+        res.send('HELLO WORLD --- ')
     }else{
         // -- http
         let to = "https://" + req.headers.host + req.url;
