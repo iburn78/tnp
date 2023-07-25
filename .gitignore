@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# NodeJS modules
+node_modules/
+
 # tnp specific files
 
