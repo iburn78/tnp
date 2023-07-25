@@ -24,7 +24,7 @@ app.get("*", (req, res) => {
 
     if(req.secure){
         // --- https
-        res.send('HELLO WORLD --- ')
+        res.send('HELLO WORLD *** ')
     }else{
         // -- http
         let to = "https://" + req.headers.host + req.url;
