@@ -8,7 +8,7 @@ const app = express();
 // Create an HTTP service.
 http.createServer(app).listen(3000);
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
     console.log("dev server");
     res.send('HELLO WORLD --- ')
 
