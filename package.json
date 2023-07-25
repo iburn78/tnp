@@ -1,0 +1,22 @@
+{
+  "name": "tnp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iburn78/tnp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iburn78/tnp/issues"
+  },
+  "homepage": "https://github.com/iburn78/tnp#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
