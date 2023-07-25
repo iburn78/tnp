@@ -133,5 +133,6 @@ node_modules/
 
 # tnp specific files
 local_settings.json
+index_dev.js
 
 
