@@ -11,6 +11,7 @@ const options = {
 
 // Create a service (the app object is just a callback).
 const app = express();
+app.set('view engine', 'ejs');
 
 // Create an HTTP service.
 http.createServer(app).listen(80);
@@ -24,7 +25,8 @@ app.get("*", (req, res) => {
 
     if(req.secure){
         // --- https
-        res.send('HELLO WORLD *** ')
+        // res.send('TN Partners --- to be developed soon. ')
+        res.render('temp')
     }else{
         // -- http
         let to = "https://" + req.headers.host + req.url;
@@ -35,4 +37,3 @@ app.get("*", (req, res) => {
 })
 // app.get('/', (req, res) => {
 //});
-
