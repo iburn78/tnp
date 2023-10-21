@@ -5,6 +5,7 @@ npm install -g nodemon
     * that way you can easily call nodemon on the CLI and since it's full installation path is referenced in your system PATH variable
 npm install bootstrap@5.3.2
 npm install bootstrap-icons
+npm install lodash
 
 Reference:
 https://github.com/iamshaunjp/node-crash-course/
