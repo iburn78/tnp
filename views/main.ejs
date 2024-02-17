@@ -8,6 +8,16 @@
     <h6>enter a proper code</h5>
     <% } %>
   </div>
-  <embed src="/update_info.txt" width="300" height="50" type=""></embed>
+  <pre id="updateDateTime"></pre>
+
+  <script>
+    // Fetch and insert update info file
+    fetch('/update_info.txt')
+      .then(response => response.text())
+      .then(content => {
+        document.getElementById('updateDateTime').innerText = content;
+      })
+      .catch(error => console.error('Error fetching file:', error));
+  </script>
       
 <%- include("./partials/footer.ejs") %>
