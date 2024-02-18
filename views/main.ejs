@@ -6,7 +6,7 @@
       <h6>No results found. Please enter a proper search keyword. </h6>
     <% } else if (locals.rows && locals.rows.length === 1) { %>
       <!-- Action 2: If there is exactly one row -->
-      <a href="/images/<%= locals.rows[0].Code %>"><img class="img-fluid" src="<%= locals.rows[0].Code %>.png" alt=""></a>
+      <a href="/images/<%= locals.rows[0].Code %>"><img class="img-fluid" src="/data/<%= locals.rows[0].Code %>.png" alt=""></a>
     <% } else if (locals.rows && locals.rows.length > 1) { %>
       <!-- Action 3: If there are more than one row -->
       <ul>
