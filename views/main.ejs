@@ -7,11 +7,27 @@
     <% } else{ %>  
     <h6>enter a proper code</h5>
     <% } %>
+  <ul>
+    <% if(locals.rows){ %>
+    <% locals.rows.forEach((row, index) => { %>
+      <li>
+        <form id="code_list_<%= index %>" action="/" method="POST">
+        <input hidden name="search_input" value="<%= row.Code %>">
+        </form>
+        <a onclick="submitForm(event, '<%= index %>')" href="#"><%= row.Name %></a>
+      </li>
+    <% }); %>
+    <% } %>
+  </ul>
   </div>
   <pre id="updateDateTime"></pre>
 
   <script>
-    // Fetch and insert update info file
+    function submitForm(event, index) {
+      event.preventDefault()
+      document.getElementById("code_list_"+index).submit();
+    }
+
     fetch('/update_info.txt')
       .then(response => response.text())
       .then(content => {
