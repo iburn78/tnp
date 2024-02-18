@@ -1,6 +1,5 @@
 const express = require('express');
 const http = require('http');
-const path = require("path");
 const app = express();
 
 http.createServer(app).listen(3000);
@@ -12,7 +11,11 @@ app.use("*", (req, res, next) => {
     next();
 });
 
-// Content part
+// ---------------------------------------
+// Content part ==========================
+// ---------------------------------------
+
+const sqlite3 = require('sqlite3').verbose();
 
 app.get("/about", (req, res) => {
     res.render('about');
@@ -23,7 +26,22 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    res.render('main', {code: req.body.search_input});
+    const db = new sqlite3.Database('df_krx.db');
+    const keyword = req.body.search_input; // || 'keyword';
+    const tableName = 'krx_data'
+    const query = `
+    SELECT * 
+    FROM ${tableName}
+    WHERE Name LIKE '%${keyword}%' OR Code LIKE '%${keyword}%'
+    `;
+
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        res.render('main', { rows });
+    });
+    db.close()
 }); 
 
 app.get('/images/:id', (req, res) => {

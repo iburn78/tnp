@@ -3,6 +3,7 @@ npm install ejs
 npm install -g nodemon
     * npm install -g nodemon or npm i -g nodemon installs nodemon on the global scope where it is referenced in your system PATH variable, 
     * that way you can easily call nodemon on the CLI and since it's full installation path is referenced in your system PATH variable
+npm install sqlite3
 
 Reference:
 https://github.com/iamshaunjp/node-crash-course/
