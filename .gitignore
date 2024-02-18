@@ -136,3 +136,5 @@ local_settings.json
 
 # public data directory as it contains images
 data/
+update_info.txt
+
