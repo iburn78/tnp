@@ -1,26 +1,31 @@
 <%- include("./partials/head.ejs") %>
 <%- include("./partials/nav.ejs") %>
-  
   <div class="container-fluid mt-2">
-    <% if(locals.code){ %>
-    <a href="/images/<%= code %>"><img class="img-fluid" src="<%= code %>.png" alt=""></a>
-    <% } else{ %>  
-    <h6>enter a proper code</h5>
+    <% if (locals.rows && locals.rows.length === 0) { %>
+      <!-- Action 1: If there are no rows -->
+      <h6>No results found. Please enter a proper search keyword. </h6>
+    <% } else if (locals.rows && locals.rows.length === 1) { %>
+      <!-- Action 2: If there is exactly one row -->
+      <a href="/images/<%= locals.rows[0].Code %>"><img class="img-fluid" src="<%= locals.rows[0].Code %>.png" alt=""></a>
+    <% } else if (locals.rows && locals.rows.length > 1) { %>
+      <!-- Action 3: If there are more than one row -->
+      <ul>
+        <% locals.rows.forEach((row, index) => { %>
+          <li>
+            <form id="code_list_<%= index %>" action="/" method="POST">
+              <input hidden name="search_input" value="<%= row.Code %>">
+            </form>
+            <a class="text-decoration-none text-dark" onclick="submitForm(event, '<%= index %>')" href="#"><%= row.Name %></a> <font class="text-muted">(<%= row.Code %>)</font></a>
+          </li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <!-- Default action if locals.rows is undefined or null -->
+      <h6>Please enter a search keyword - name or code.</h6>
     <% } %>
-  <ul>
-    <% if(locals.rows){ %>
-    <% locals.rows.forEach((row, index) => { %>
-      <li>
-        <form id="code_list_<%= index %>" action="/" method="POST">
-        <input hidden name="search_input" value="<%= row.Code %>">
-        </form>
-        <a onclick="submitForm(event, '<%= index %>')" href="#"><%= row.Name %></a>
-      </li>
-    <% }); %>
-    <% } %>
-  </ul>
   </div>
-  <pre id="updateDateTime"></pre>
+  
+  <pre class='m-2 p-1 text-muted' id="updateDateTime"></pre>
 
   <script>
     function submitForm(event, index) {
