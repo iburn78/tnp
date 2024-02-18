@@ -6,7 +6,9 @@
       <h6>No results found. Please enter a proper search keyword. </h6>
     <% } else if (locals.rows && locals.rows.length === 1) { %>
       <!-- Action 2: If there is exactly one row -->
-      <a href="/images/<%= locals.rows[0].Code %>"><img class="img-fluid" src="/data/<%= locals.rows[0].Code %>.png" alt=""></a>
+      <div id="dataDisplay">
+      <a href="/images/<%= locals.rows[0].Code %>"><img class="img-fluid" src="/data/<%= locals.rows[0].Code %>.png" alt="" onerror="imageNotFound()"></a>
+      </div>
     <% } else if (locals.rows && locals.rows.length > 1) { %>
       <!-- Action 3: If there are more than one row -->
       <ul>
@@ -28,6 +30,14 @@
   <pre class='m-2 p-1 text-muted' id="updateDateTime"></pre>
 
   <script>
+    function imageNotFound() {
+      document.getElementById("dataDisplay").innerHTML = `
+      Data not available.
+      - Financial institution data is not avaialble 
+      - ONly companies currently list on the KRX are available 
+      `
+
+    }
     function submitForm(event, index) {
       event.preventDefault()
       document.getElementById("code_list_"+index).submit();
