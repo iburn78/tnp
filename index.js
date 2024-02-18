@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    const db = new sqlite3.Database('data/dpublic/data/df_krx.df');
+    const db = new sqlite3.Database('public/data/df_krx.df');
     const keyword = req.body.search_input; // || 'keyword';
     const tableName = 'krx_data'
     const query = `
