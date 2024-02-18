@@ -6,7 +6,9 @@
       <h6>No results found. Please enter a proper search keyword. </h6>
     <% } else if (locals.rows && locals.rows.length === 1) { %>
       <!-- Action 2: If there is exactly one row -->
-      <a href="/images/<%= locals.rows[0].Code %>"><img class="img-fluid" src="<%= locals.rows[0].Code %>.png" alt=""></a>
+      <div id="dataDisplay">
+      <a href="/images/<%= locals.rows[0].Code %>"><img class="img-fluid" src="/data/<%= locals.rows[0].Code %>.png" alt="" onerror="imageNotFound()"></a>
+      </div>
     <% } else if (locals.rows && locals.rows.length > 1) { %>
       <!-- Action 3: If there are more than one row -->
       <ul>
@@ -28,6 +30,16 @@
   <pre class='m-2 p-1 text-muted' id="updateDateTime"></pre>
 
   <script>
+    function imageNotFound() {
+      document.getElementById("dataDisplay").innerHTML = `
+      <p>Data not available.</p>
+      <ul>
+        <li>Financial institution data is not available</li>
+        <li>Only companies currently listed on the KRX are available</li>
+      </ul>
+      `
+
+    }
     function submitForm(event, index) {
       event.preventDefault()
       document.getElementById("code_list_"+index).submit();
@@ -36,7 +48,7 @@
     fetch('/update_info.txt')
       .then(response => response.text())
       .then(content => {
-        document.getElementById('updateDateTime').innerText = content;
+        document.getElementById('updateDateTime').innerText = 'Last updated: '+content;
       })
       .catch(error => console.error('Error fetching file:', error));
   </script>
