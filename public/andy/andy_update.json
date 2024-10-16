@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
     "date": "2024-10-16",
     "update": "Daily trading report",
@@ -8,15 +7,4 @@
         "failed_trades": 30
     },
     "notes": "All systems are operational."
-=======
-{
-    "date": "2024-10-16",
-    "update": "Daily trading report",
-    "statistics": {
-        "total_trades": 150,
-        "successful_trades": 120,
-        "failed_trades": 30
-    },
-    "notes": "All systems are operational."
->>>>>>> refs/remotes/origin/main
 }
