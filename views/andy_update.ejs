@@ -8,14 +8,22 @@
   </div>
   <div class="row">
     <div class="col d-flex justify-content-center align-items-center">
-    <strong>Date:</strong> <%= report.date %><br>
-
-    <strong>Update:</strong> <%= report.update %><br>
-
-    <strong>Total Trades:</strong> <%= report.statistics.total_trades %><br>
-    <strong>Successful Trades:</strong> <%= report.statistics.successful_trades %><br>
-    <strong>Failed Trades:</strong> <%= report.statistics.failed_trades %><br>
-    <strong>Notes:</strong><br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Object.entries(report).forEach(([key, value]) => { %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= value %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
