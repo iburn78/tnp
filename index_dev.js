@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const fs = require('fs');
 const app = express();
 
 http.createServer(app).listen(3000);
@@ -48,6 +49,22 @@ app.get('/images/:id', (req, res) => {
     const id = req.params.id;
     res.render('image', {code:id})
 }); 
+
+app.get("/andy", (req, res) => {
+    const filePath = 'public/andy/andy_update.json'
+    
+    // Read the JSON file
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error("Error reading the file:", err);
+            res.status(500).send("Error loading data.");
+        } else {
+            const jsonData = JSON.parse(data);
+            // Pass jsonData to the EJS template
+            res.render('andy', { report: jsonData });
+        }
+    });
+});
 
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' });
