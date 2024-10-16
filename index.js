@@ -78,7 +78,7 @@ app.get("/andy", (req, res) => {
         } else {
             const jsonData = JSON.parse(data);
             // Pass jsonData to the EJS template
-            res.render('andy', { report: jsonData });
+            res.render('andy_update', { report: jsonData });
         }
     });
 });
