@@ -133,12 +133,12 @@ node_modules/
 
 # tnp specific files
 local_settings.json
-andy_update.json
 
 # public data directory as it contains images
 data/
 log/
 update_info.txt
+andy/
 
 
 
