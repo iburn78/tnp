@@ -2,7 +2,7 @@ import FinanceDataReader as fdr
 import json
 from datetime import datetime
 
-periodic_update_file = '~/tnp/public/andy/periodic_update.json'
+periodic_update_file = 'public/andy/periodic_update.json'
 pud = dict()
 
 def code_desc_current(pr, code, range):
