@@ -67,8 +67,8 @@ app.get('/images/:id', (req, res) => {
     res.render('image', {code:id})
 }); 
 
-app.get("/andy", (req, res) => {
-    const filePath = 'public/andy/andy_update.json'
+app.get("/andy_d", (req, res) => {
+    const filePath = 'public/andy/daily_update.json'
     
     // Read the JSON file
     fs.readFile(filePath, 'utf8', (err, data) => {
@@ -78,7 +78,23 @@ app.get("/andy", (req, res) => {
         } else {
             const jsonData = JSON.parse(data);
             // Pass jsonData to the EJS template
-            res.render('andy_update', { report: jsonData });
+            res.render('daily_update', { report: jsonData });
+        }
+    });
+});
+
+app.get("/andy_p", (req, res) => {
+    const filePath = 'public/andy/periodic_update.json'
+    
+    // Read the JSON file
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error("Error reading the file:", err);
+            res.status(500).send("Error loading data.");
+        } else {
+            const jsonData = JSON.parse(data);
+            // Pass jsonData to the EJS template
+            res.render('peoridic_update', { report: jsonData });
         }
     });
 });
