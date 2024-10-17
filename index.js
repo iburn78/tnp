@@ -94,7 +94,7 @@ app.get("/andy_p", (req, res) => {
         } else {
             const jsonData = JSON.parse(data);
             // Pass jsonData to the EJS template
-            res.render('peoridic_update', { report: jsonData });
+            res.render('periodic_update', { report: jsonData });
         }
     });
 });
