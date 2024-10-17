@@ -21,9 +21,9 @@ def code_desc_current(pr, code, range):
         status = f'price HIGHER than {ub}: check'
 
     if high >= ub:
-        status += f'high value {high} hit over {ub}'
+        status += f' | high value {high} hit over {ub}'
     if low <= lb:
-        status += f'low value {low} hit under {lb}'
+        status += f' | low value {low} hit under {lb}'
 
     return status
 
