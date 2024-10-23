@@ -35,7 +35,7 @@ current_time = datetime.now()
 code1 = '011200'  # HMM
 code1_range = (16000, 18000)
 code2 = '294090'  # 25f
-code2_range = (5500, 10000)
+code2_range = (5000, 10000)
 
 # Get statuses
 status1 = code_desc_current(pr, code1, code1_range)
