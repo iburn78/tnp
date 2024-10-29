@@ -16,7 +16,7 @@ app.use("*", (req, res, next) => {
     res.locals.meta = {
         ogTitle: ogTitle, 
         ogDesc: 'Review and analyze quarterly performances!', 
-        ogImage: '/images/IssueTracker_Logo.png', 
+        ogImage: '/images/thumbnail_issuetracker.jpg', 
     };
     next();
 });
