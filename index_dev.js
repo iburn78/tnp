@@ -9,6 +9,15 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended:true})); 
 
 app.use("*", (req, res, next) => { 
+    const host = req.headers.host;
+    const ogTitle = (host === 'tnpartners.net' || host === 'www.tnpartners.net') 
+        ? 'TN Partners' 
+        : 'Quarterly Performances';
+    res.locals.meta = {
+        ogTitle: ogTitle, 
+        ogDesc: 'Review and analyze quarterly performances!', 
+        ogImage: '/static/images/IssueTracker.png', 
+    };
     next();
 });
 
@@ -23,6 +32,8 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+    const host = req.headers.host;
+    // might do actions depending on the host
     res.render('main', {});
 });
 

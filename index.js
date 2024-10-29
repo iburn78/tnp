@@ -6,8 +6,8 @@ const app = express();
 
 let local_settings = JSON.parse(fs.readFileSync('local_settings.json'));
 const options = {
-  key: fs.readFileSync(local_settings.key),
-  cert: fs.readFileSync(local_settings.cert)
+    key: fs.readFileSync(local_settings.key),
+    cert: fs.readFileSync(local_settings.cert)
 };
 
 app.set('view engine', 'ejs');
@@ -19,6 +19,15 @@ https.createServer(options, app).listen(443, () => {
 }); 
 
 app.use("*", (req, res, next) => {
+    const host = req.headers.host;
+    const ogTitle = (host === 'tnpartners.net' || host === 'www.tnpartners.net') 
+        ? 'TN Partners' 
+        : 'Quarterly Performances';
+    res.locals.meta = {
+        ogTitle: ogTitle, 
+        ogDesc: 'Review and analyze quarterly performances!', 
+        ogImage: '/static/images/IssueTracker.png', 
+    };
     if(req.secure){
         // --- https
         next();
@@ -27,7 +36,6 @@ app.use("*", (req, res, next) => {
         return res.redirect("https://" + req.headers.host + req.url);
     }
 })
-
 
 // ---------------------------------------
 // Content part ==========================
@@ -40,6 +48,8 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+    const host = req.headers.host;
+    // might do actions depending on the host
     res.render('main', {});
 });
 
