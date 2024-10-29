@@ -26,7 +26,7 @@ app.use("*", (req, res, next) => {
     res.locals.meta = {
         ogTitle: ogTitle, 
         ogDesc: 'Review and analyze quarterly performances!', 
-        ogImage: '/static/images/IssueTracker.png', 
+        ogImage: '/images/IssueTracker_Logo.png', 
     };
     if(req.secure){
         // --- https
