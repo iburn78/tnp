@@ -20,27 +20,21 @@ app.use(express.urlencoded({ extended: true }));
 http.createServer(app).listen(80);
 https.createServer(options, app).listen(443);
 
-app.use("*", (req, res, next) => {
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store'); // Disable caching
     const host = req.headers.host;
     // Redirect to HTTPS if request is not secure
     if (!req.secure) {
         return res.redirect("https://" + host + req.url);
     }
-    next();
-});
-
-// Load specific routes based on domain
-app.use((req, res, next) => {
-    const host = req.headers.host;
+    // Load specific routes based on domain
     if (host.includes("quarterlyperf.com")) {
-        res.locals.routeMessage = 'quarterly perf entered';
-        app.use("/", quarterlyperfRoutes);
+        res.locals.routeMessage = 'quarterly perf connected'; // expressed in footer.ejs
+        return quarterlyperfRoutes(req, res, next); // Call the routes directly
     } else if (host.includes("tnpartners.net")) {
-        res.locals.routeMessage = 'tnpartners entered';
-        app.use("/", tnpartnersRoutes);
+        res.locals.routeMessage = 'tnpartners connected'; // expressed in footer.ejs
+        return tnpartnersRoutes(req, res, next); // Call the routes directly
     } else {
-        res.status(404).render('404', { title: '404' });
+        return res.status(404).render('404', { title: '404' });
     }
-    next();
 });
-

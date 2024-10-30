@@ -14,13 +14,16 @@ http.createServer(app).listen(3000);
 
 // Load specific routes based on domain
 app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store'); // Disable caching
     const host = req.headers.host;
+    // Load specific routes based on domain
     if (host.includes("quarterlyperf.local")) {
-        app.use("/", quarterlyperfRoutes);
+        res.locals.routeMessage = 'quarterly perf connected'; // expressed in footer.ejs
+        return quarterlyperfRoutes(req, res, next); // Call the routes directly
     } else if (host.includes("tnpartners.local")) {
-        app.use("/", tnpartnersRoutes);
+        res.locals.routeMessage = 'tnpartners connected'; // expressed in footer.ejs
+        return tnpartnersRoutes(req, res, next); // Call the routes directly
     } else {
-        res.status(404).render('404', { title: '404' });
+        return res.status(404).render('404', { title: '404' });
     }
-    next();
 });

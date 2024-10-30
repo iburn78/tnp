@@ -12,7 +12,7 @@ router.use("*", (req, res, next) => {
 });
 
 router.get("/", (req, res) => {
-    res.render('tnpartners/main', {});
+    res.render('tnpartners/main', {timestamp: Date.now()});
 });
 
 router.get("/about", (req, res) => {

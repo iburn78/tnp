@@ -17,7 +17,7 @@ router.get("/about", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-    res.render('quarterlyperf/main', {});
+    res.render('quarterlyperf/main', {timestamp: Date.now()});
 });
 
 router.post("/", (req, res) => {
