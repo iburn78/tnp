@@ -33,8 +33,10 @@ app.use("*", (req, res, next) => {
 app.use((req, res, next) => {
     const host = req.headers.host;
     if (host.includes("quarterlyperf.com")) {
+        console.log('quarterly perf entered');
         app.use("/", quarterlyperfRoutes);
     } else if (host.includes("tnpartners.net")) {
+        console.log('tnpartners net entered');
         app.use("/", tnpartnersRoutes);
     } else {
         res.status(404).render('404', { title: '404' });
