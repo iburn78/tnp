@@ -34,7 +34,7 @@ router.post("/", (req, res) => {
         if (err) {
             throw err;
         }
-        res.render('quarterlyperf/main', { rows });
+        res.render('quarterlyperf/main', { rows, timestamp: Date.now() });
     });
     db.close()
 }); 
