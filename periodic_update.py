@@ -8,10 +8,20 @@ pud = dict()
 
 def code_desc_current(pr, code, range):
     stock_info = pr[pr['Code'] == code]
-    price = int(stock_info['Close'].values[0])
-    high = int(stock_info['High'].values[0])
-    low = int(stock_info['Low'].values[0])
-    vol = int(stock_info['Volume'].values[0])
+    price = stock_info['Close'].values[0]
+    high = stock_info['High'].values[0]
+    low = stock_info['Low'].values[0]
+    vol = stock_info['Volume'].values[0]
+    def _rem(i): 
+        if not i.isdigit():
+            return 0
+        else: 
+            return i
+    
+    price = _rem(price)
+    high = _rem(high)
+    low = _rem(low)
+    vol = _rem(vol)
 
     lb, ub = range
     if lb <= price <= ub:
