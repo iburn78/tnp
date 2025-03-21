@@ -53,6 +53,15 @@
       document.getElementById("code_list_"+index).submit();
     }
 
+
+    document.addEventListener("click", function(event) {
+    let link = event.target.closest("a");
+    if (link && (event.ctrlKey || event.metaKey)) {
+        window.open(link.href, "_blank");
+        event.preventDefault();
+    }
+    });
+
     fetch('/update_info.txt')
       .then(response => response.text())
       .then(content => {
