@@ -48,19 +48,22 @@
       `
 
     }
+
+    // function submitForm(event, index) {
+    //   event.preventDefault()
+    //   document.getElementById("code_list_"+index).submit();
+    // }
+
     function submitForm(event, index) {
-      event.preventDefault()
-      document.getElementById("code_list_"+index).submit();
+      event.preventDefault(); // Prevent default link behavior
+      let form = document.getElementById("code_list_" + index);
+      if (event.ctrlKey || event.metaKey) {
+        form.target = "_blank"; // Open in new tab
+      } else {
+        form.target = "_self"; // Open in the same tab
+      }
+      form.submit(); 
     }
-
-
-    document.addEventListener("click", function(event) {
-    let link = event.target.closest("a");
-    if (link && (event.ctrlKey || event.metaKey)) {
-        window.open(link.href, "_blank");
-        event.preventDefault();
-    }
-    });
 
     fetch('/update_info.txt')
       .then(response => response.text())
