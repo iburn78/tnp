@@ -58,11 +58,10 @@
       event.preventDefault(); // Prevent default link behavior
       let form = document.getElementById("code_list_" + index);
       if (event.ctrlKey || event.metaKey) {
-        // form.target = "_blank"; // Open in new tab
 
         // Open in new tab to gain focus
         let newTab = window.open("", "_blank");
-        form.target = newTab.name; // Ensures submission goes to the new tab
+        form.target = "_blank"; // Open in new tab
 
       } else {
         form.target = "_self"; // Open in the same tab
