@@ -55,14 +55,10 @@
     // }
 
     function submitForm(event, index) {
-      event.preventDefault(); // Prevent default link behavior
+      event.preventDefault(); 
       let form = document.getElementById("code_list_" + index);
       if (event.ctrlKey || event.metaKey) {
-
-        // Open in new tab to gain focus
-        let newTab = window.open("", "_blank");
         form.target = "_blank"; // Open in new tab
-
       } else {
         form.target = "_self"; // Open in the same tab
       }
