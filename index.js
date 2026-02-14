@@ -1,40 +1,43 @@
 const express = require('express');
-const https = require('https');
-const http = require('http');
-const fs = require('fs');
-const app = express();
-
-let local_settings = JSON.parse(fs.readFileSync('local_settings.json'));
-const options = {
-    key: fs.readFileSync(local_settings.key),
-    cert: fs.readFileSync(local_settings.cert)
-};
+const app1 = express();
+const app2 = express();
 
 const quarterlyperfRoutes = require('./routes/quarterlyperf');
 const tnpartnersRoutes = require('./routes/tnpartners');
 
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
+// === QUARTERLY PERF (PORT 3000) ===
+app1.set('view engine', 'ejs');
+app1.use(express.static('public'));
+app1.use(express.urlencoded({ extended: true }));
 
-http.createServer(app).listen(80);
-https.createServer(options, app).listen(443);
-
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store'); // Disable caching
-    const host = req.headers.host;
-    // Redirect to HTTPS if request is not secure
-    if (!req.secure) {
-        return res.redirect("https://" + host + req.url);
-    }
-    // Load specific routes based on domain
-    if (host.includes("quarterlyperf.com")) {
-        res.locals.routeMessage = 'quarterly perf connected'; // expressed in footer.ejs
-        return quarterlyperfRoutes(req, res, next); // Call the routes directly
-    } else if (host.includes("tnpartners.net")) {
-        res.locals.routeMessage = 'tnpartners connected'; // expressed in footer.ejs
-        return tnpartnersRoutes(req, res, next); // Call the routes directly
-    } else {
-        return res.status(404).render('404', { title: '404' });
-    }
+// Add routeMessage for footer.ejs
+app1.use((req, res, next) => {
+    res.locals.routeMessage = 'quarterly perf connected';
+    next();
 });
+
+// Mount quarterlyperf routes
+app1.use(quarterlyperfRoutes);
+
+app1.listen(3000, () => {
+    console.log('QuarterlyPerf running on port 3000');
+});
+
+// === TN PARTNERS (PORT 4000) ===
+app2.set('view engine', 'ejs');
+app2.use(express.static('public'));
+app2.use(express.urlencoded({ extended: true }));
+
+// Add routeMessage for footer.ejs
+app2.use((req, res, next) => {
+    res.locals.routeMessage = 'tnpartners connected';
+    next();
+});
+
+// Mount tnpartners routes
+app2.use(tnpartnersRoutes);
+
+app2.listen(4000, () => {
+    console.log('TNPartners running on port 4000');
+});
+
