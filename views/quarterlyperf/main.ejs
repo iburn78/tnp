@@ -48,9 +48,21 @@
       `
 
     }
+
+    // function submitForm(event, index) {
+    //   event.preventDefault()
+    //   document.getElementById("code_list_"+index).submit();
+    // }
+
     function submitForm(event, index) {
-      event.preventDefault()
-      document.getElementById("code_list_"+index).submit();
+      event.preventDefault(); 
+      let form = document.getElementById("code_list_" + index);
+      if (event.ctrlKey || event.metaKey) {
+        form.target = "_blank"; // Open in new tab
+      } else {
+        form.target = "_self"; // Open in the same tab
+      }
+      form.submit(); 
     }
 
     fetch('/update_info.txt')
