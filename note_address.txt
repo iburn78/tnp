@@ -1,0 +1,13 @@
+10.245.110.101
+
+> hostname -I # gives local wifi LAN address
+
+> node index.js # runs local server
+
+> http://(addr):3000 # quarterlyperf
+
+> http://(addr):4000 # tnpartners
+
+> ssh andy@(hostname -I addr) # ssh should be turned on (done)
+
+* linux pc is always on # sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target (done)
