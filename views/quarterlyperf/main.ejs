@@ -58,7 +58,7 @@
       form.submit(); 
     }
 
-    fetch('/update_info.txt')
+    fetch('data/update_info.txt')
       .then(response => response.text())
       .then(content => {
         document.getElementById('updateDateTime').innerText = 'Last updated: '+content;
